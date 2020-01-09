@@ -20,15 +20,21 @@ python MergeWARC.py
 
 ### Parameters
 
-'-p' or '--path'        --> 'Localization of the patching files'
-'-d' or '--destination' --> 'Destination of the patching files merged'
-'-n' or '--filename',   --> 'Filename_template of the patching files merged'
-'-e' or '--extension'   --> 'Extension of originated files'
-'-s' or '--size'        --> 'Size of the files merged (MB)'
+<pre>
+-p or --path        --> Localization of the patching files
+-d or --destination --> Destination of the patching files merged
+-n or --filename    --> Filename_template of the patching files merged
+-e or --extension   --> Extension of originated files
+-s or --size        --> Size of the files merged (MB)
+</pre>
 
 ### Example
 
+Example and default parameters:
+
+```
 python MergeWARC.py -p ./PATCHING2019/ -d ./MergePatching/ -n patching-merged-{timestamp}-{random}.warc.gz -e warc.gz -s 100
+```
 
 ### Authors
 
