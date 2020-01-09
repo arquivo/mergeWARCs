@@ -1,2 +1,2 @@
-click
-warcio
+click==7.0
+warcio==1.7.1
