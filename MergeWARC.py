@@ -57,20 +57,32 @@ def script():
 
     click.secho("Starting merge warcs patching...", fg='green')
     #import pdb;pdb.set_trace()
+    findFileExtension = False
     for subdir, dirs, files in os.walk(mypath):
-        with click.progressbar(length=len(files), show_pos=True) as progress_bar:
-            for file in files:
-                progress_bar.update(1)
-                if file.endswith(extension):
-                    file_name = os.path.join(subdir, file)
-                    with open(file_name, 'rb') as stream:
-                        for record in ArchiveIterator(stream):
-                            if os.path.getsize(filename) > sizeFile and record.rec_type == 'request':
-                                output.close()
-                                filename = namePatchingMergedFile(filename_template, destination)
-                                output = open(filename, 'wb')
-                                writer = WARCWriter(output, gzip=True)
-                            writer.write_record(record)
+        if files:
+            with click.progressbar(length=len(files), show_pos=True) as progress_bar:
+                for file in files:
+                    progress_bar.update(1)
+                    if file.endswith(extension):
+                        findFileExtension = True
+                        file_name = os.path.join(subdir, file)
+                        with open(file_name, 'rb') as stream:
+                            for record in ArchiveIterator(stream):
+                                if os.path.getsize(filename) > sizeFile and record.rec_type == 'request':
+                                    output.close()
+                                    filename = namePatchingMergedFile(filename_template, destination)
+                                    output = open(filename, 'wb')
+                                    writer = WARCWriter(output, gzip=True)
+                                writer.write_record(record)
+                
+        else:
+            raise ValueError('No files to be merged. Empty localization \"-path\"')
+    if not findFileExtension:
+        raise ValueError('No WARCs find \"-path\"')
+    for subdir, dirs, files in os.walk(destination):
+        if not files:
+            raise ValueError('Be careful no file created!!. Empty destination \"-destination\"')
+
 
 if __name__ == '__main__':
     script()
