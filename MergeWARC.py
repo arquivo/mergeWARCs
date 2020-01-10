@@ -16,7 +16,7 @@ parser.add_argument('-p','--path', help='Localization of the patching files', de
 parser.add_argument('-d','--destination', help='Destination of the patching files merged', default= "./Merge/")
 parser.add_argument('-n','--filename', help='Filename_template of the patching files merged', default="patching-merged-{timestamp}-{random}.warc.gz")
 parser.add_argument('-e','--extension', help='Extension of originated files', default="warc.gz")
-parser.add_argument('-s','--size', help='Size of the files merged (MB)', default=100)
+parser.add_argument('-s','--size', help='Size of the files merged (MB)', type=int, default=100)
 args = vars(parser.parse_args())
 
 ##criar um git, fazer o readme, requimerent.txt(versão python)
