@@ -32,7 +32,10 @@ def namePatchingMergedFile(filename_template, destination):
         string_aux = string_aux.replace("{random}", str(random_generated))
     if "{timestamp}" not in filename_template and "{random}" not in filename_template:
         raise ValueError('Filename without unique identifiers (e.g., timestamp).')
-    return destination + string_aux
+    if destination.endswith("/"):
+        return destination + string_aux
+    else:
+        return destination + "/" + string_aux
 
 
 def script():
