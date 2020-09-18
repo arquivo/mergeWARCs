@@ -73,6 +73,9 @@ def script():
                                     filename = namePatchingMergedFile(filename_template, destination)
                                     output = open(filename, 'wb')
                                     writer = WARCWriter(output, gzip=True)
+                                #If it is necessary to change the warc date
+                                #if record.rec_type == 'revisit':
+                                #    record.rec_headers.replace_header('WARC-Date', '2009-10-26T19:20:22Z')
                                 writer.write_record(record)
                 
         else:
